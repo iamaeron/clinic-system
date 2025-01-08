@@ -1,0 +1,24 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "svelte": "^5.15.0",
+    "tailwindcss": "^4.0.0-beta.8",
+    "vite": "^6.0.5"
+  },
+  "dependencies": {
+    "@roxi/routify": "^3.0.0-next.248",
+    "@tailwindcss/postcss": "^4.0.0-beta.8",
+    "@tailwindcss/vite": "^4.0.0-beta.8"
+  }
+}
