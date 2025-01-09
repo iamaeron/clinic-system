@@ -9,6 +9,7 @@
     "@lucia-auth/adapter-postgresql": "^3.1.2",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.38.3",
+    "drizzle-seed": "^0.3.0",
     "hono": "^4.6.16",
     "lucia": "^3.2.2",
     "pg": "^8.13.1"

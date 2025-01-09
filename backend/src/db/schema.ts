@@ -1,13 +1,11 @@
 import 'dotenv/config'
-import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
 import { relations } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/node-postgres";
-import { pgTable, timestamp, text, boolean } from "drizzle-orm/pg-core";
+import { pgTable, timestamp, text, boolean, date } from "drizzle-orm/pg-core";
 import pg from 'pg'
-import { Lucia } from 'lucia';
+import { drizzle } from "drizzle-orm/node-postgres";
 
 const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL! });
-const db = drizzle({ client: pool });
+export const db = drizzle({ client: pool });
 
 export const users = pgTable("user", {
 	id: text("id").primaryKey(),
@@ -36,26 +34,11 @@ export const recordsTable = pgTable('records', {
     id: text('id').primaryKey(),
 	userId: text('user_id').references(() => users.id),
 	cause: text('cause'),
+	timeIn: date('time_in'),
+	timeOut: date('time_out'),
 	advisedSolution: text('advised_solution'),
-	studentName: text('student_name'),
+	studentName: text('student_name').notNull(),
 	studentSection: text('student_section').notNull(),
 	offCampus: boolean('off_campus').default(false),
+	createdAt: timestamp('created_at', { withTimezone: true, mode: "date" })
 })
-
-const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
-
-export const lucia = new Lucia(adapter, {
-	sessionCookie: {
-		attributes: {
-			// set to `true` when using HTTPS
-			secure: process.env.NODE_ENV === "production"
-		}
-	}
-});
-
-// IMPORTANT!
-declare module "lucia" {
-	interface Register {
-		Lucia: typeof lucia;
-	}
-}
