@@ -4,18 +4,16 @@
   const {
     elements: { root },
   } = createLabel();
-
-  const { required, children } = $props();
+  const { required = false, children, ...props } = $props();
 </script>
 
 <label
   use:melt={$root}
-  for="email"
-  class="block text-sm font-semibold text-zinc-600"
-  data-melt-part="root"
+  for={props.for}
+  class={[props.class, "font-semibold text-zinc-600 block text-sm"].join(" ")}
 >
-  {children}
+  <span>{@render children?.()}</span>
   {#if required}
-    <span class="inline ml-1 text-rose-600">*</span>
+    <span class="text-rose-600">*</span>
   {/if}
 </label>

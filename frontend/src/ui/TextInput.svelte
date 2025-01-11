@@ -1,3 +1,40 @@
-<input
-  class="border-zinc-300 !outline-none bg-zinc-50 focus:bg-white border shadow-sm shadow-black/[0.05] w-full text-sm px-3.5 py-2 text-zinc-600 focus:text-zinc-800 transition-[border,box-shadow] focus:ring-4 focus:ring-zinc-800/10 focus:border-zinc-800 rounded-xl font-medium disabled:opacity-70 disabled:cursor-not-allowed"
-/>
+<script>
+  let {
+    value = $bindable(""),
+    withIcon = false,
+    iconDirection = "right",
+    ...props
+  } = $props();
+</script>
+
+{#if withIcon}
+  <div
+    class="items-center flex outline-2 outline-solid outline-transparent -outline-offset-2 bg-zinc-50 w-full rounded-lg border border-zinc-300 shadow-sm focus-within:outline-accent focus-within:bg-white text-sm overflow-hidden"
+  >
+    {#if iconDirection === "left"}
+      {@render props.children?.()}
+    {/if}
+    <input
+      bind:value
+      {...props}
+      type={props.type ?? "text"}
+      class={[
+        props.class,
+        "px-3.5 py-1.5 text-zinc-600 focus:text-zinc-800 font-medium bg-zinc-50 w-full border-0 focus:outline-none focus:bg-white focus:border-transparent focus:ring-0",
+      ].join(" ")}
+    />
+    {#if iconDirection === "right"}
+      {@render props.children?.()}
+    {/if}
+  </div>
+{:else}
+  <input
+    bind:value
+    {...props}
+    type={props.type ?? "text"}
+    class={[
+      props.class,
+      "px-3.5 py-1.5 text-zinc-600 focus:text-zinc-800 font-medium bg-zinc-50 w-full rounded-lg border border-solid border-zinc-300 shadow-sm focus:outline-accent focus:bg-white focus:border-transparent focus:ring-0 text-sm",
+    ].join(" ")}
+  />
+{/if}
