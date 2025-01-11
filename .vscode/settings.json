@@ -1,3 +1,4 @@
 {
-    "prettier.configPath": "frontend/.prettierrc"
+    "prettier.configPath": "frontend/.prettierrc",
+    "prettier.requireConfig": true
 }
