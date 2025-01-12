@@ -3,8 +3,19 @@
   import InputLabel from "@/ui/InputLabel.svelte";
   import TextInput from "@/ui/TextInput.svelte";
   import Icon from "@iconify/svelte";
+  import axios from "axios";
 
   // const s = fetch('/api/signin', { method: 'POST' }).then(r => r.text()).then(d => console.log(d));
+
+  let email = $state("");
+  let password = $state("");
+
+  function signin() {
+    axios.post("/api/signin", {
+      email,
+      password,
+    });
+  }
 </script>
 
 <div
@@ -64,20 +75,23 @@
           <div class="space-y-4 px-8 pb-8">
             <div>
               <InputLabel for="email" required class="mb-1">Email</InputLabel>
-              <TextInput autofocus />
+              <TextInput bind:value={email} autofocus />
             </div>
             <div>
               <InputLabel for="password" required class="mb-1"
                 >Password</InputLabel
               >
-              <TextInput withIcon>
-                <button class="px-2">
+              <TextInput bind:value={password} withIcon>
+                <button class="px-2 hover:bg-zinc-200">
                   <Icon icon="tabler:eye" class="w-5 h-5 text-zinc-500" />
                 </button>
               </TextInput>
             </div>
 
-            <Button class="!w-full mt-6">Continue</Button>
+            {email}
+            {password}
+
+            <Button onclick={signin} class="!w-full mt-6">Continue</Button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { Context } from "hono";
 import { lucia } from "../auth";
-import { verify } from "@node-rs/argon2";
+import { verify } from "argon2";
 import { db } from "../db";
 import { users } from "../db/schema";
 import { eq } from "drizzle-orm";
@@ -41,7 +41,7 @@ export const authController = async (c: Context) => {
 		});
 	}
 
-	const validPassword = await verify(user.password, password, ARGON_OPTIONS);
+	const validPassword = await verify(user.password, password);
 	if (!validPassword) {
 		return new Response("Invalid email or password", {
 			status: 400
@@ -53,7 +53,7 @@ export const authController = async (c: Context) => {
 	return new Response(null, {
 		status: 302,
 		headers: {
-			Location: "/",
+			Location: "/dashboard",
 			"Set-Cookie": sessionCookie.serialize()
 		}
 	});

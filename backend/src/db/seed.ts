@@ -1,4 +1,4 @@
-import { hash } from "@node-rs/argon2"
+import { hash } from "argon2"
 import { db } from "."
 import { users } from "./schema"
 import { ARGON_OPTIONS } from "../options"

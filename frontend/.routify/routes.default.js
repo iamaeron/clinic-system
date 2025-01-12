@@ -15,6 +15,20 @@ export default {
   "routifyDir": import.meta.url,
   "children": [
     {
+      "meta": {},
+      "id": "_default_dashboard_svelte",
+      "name": "dashboard",
+      "file": {
+        "path": "src/routes/dashboard.svelte",
+        "dir": "src/routes",
+        "base": "dashboard.svelte",
+        "ext": ".svelte",
+        "name": "dashboard"
+      },
+      "asyncModule": () => import('../src/routes/dashboard.svelte'),
+      "children": []
+    },
+    {
       "meta": {
         "isDefault": true
       },

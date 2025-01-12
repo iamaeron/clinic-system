@@ -24,6 +24,7 @@
   "dependencies": {
     "@roxi/routify": "^3.0.0-next.248",
     "@tailwindcss/postcss": "^4.0.0-beta.8",
-    "@tailwindcss/vite": "^4.0.0-beta.8"
+    "@tailwindcss/vite": "^4.0.0-beta.8",
+    "axios": "^1.7.9"
   }
 }
